@@ -1,10 +1,14 @@
 import express from 'express';
 import gameRouter from './routers/gameRouter.js';
 import { notFound } from './middlewares.js';
+import cors from 'cors';
 
 
 const app = express();
 const port = 3000;
+
+// cors
+app.use(cors());
 
 // static assets
 app.use(express.static("public"));

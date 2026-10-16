@@ -2,120 +2,144 @@ import connection from '../data/db.js'
 
 // index
 export const index = async (req, res) => {
-    // SQL query
-    let sql = 'SELECT * FROM boardgames WHERE 1=1';
+    try {
+        // SQL query
+        let sql = 'SELECT * FROM boardgames WHERE 1=1';
 
-    // connection query
-    const [results] = await connection.query(sql);
-    res.json(results);
+        // connection query
+        const [results] = await connection.query(sql);
+        res.json(results);
+    }
+    catch {
+        console.error("Errore durante la fetch dei giochi");
+        res.status(500).json({ status: "server error", message: "internal server error" });
+    }
 };
 
 // show
 export const show = async (req, res) => {
-    // extract id
-    const id = Number(req.params.id);
+    try {
+        // extract id
+        const id = Number(req.params.id);
 
-    // check id
-    if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
+        // check id
+        if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
 
-    // SQL query
-    const gameSql = 'SELECT * FROM boardgames WHERE id = ?';
-    const reviewsSql = `
-    SELECT r.*
-    FROM reviews r
-    JOIN boardgames b
-    ON b.id = r.id_boardgame
-    WHERE r.id_boardgame = ?
-    `;
+        // SQL query
+        const gameSql = 'SELECT * FROM boardgames WHERE id = ?';
+        const reviewsSql = 'SELECT * FROM reviews WHERE r.id_boardgame = ?';
 
-    // connection query
-    // game
-    const [gameResult] = await connection.query(gameSql, [id]);
+        // connection query
+        // game
+        const [gameResult] = await connection.query(gameSql, [id]);
 
-    // check on game result
-    if (gameResult.length === 0) return res.status(404).json({ status: "not found", message: "game not found" })
+        // check on game result
+        if (gameResult.length === 0) return res.status(404).json({ status: "not found", message: "game not found" })
 
-    // extraction of result from game query
-    const [game] = gameResult;
+        // extraction of result from game query
+        const [game] = gameResult;
 
-    // reviews
-    const [reviewsResult] = await connection.query(reviewsSql, [id]);
+        // reviews
+        const [reviewsResult] = await connection.query(reviewsSql, [id]);
 
-    // add reviews array to game const
-    game.reviews = reviewsResult;
+        // add reviews array to game const
+        game.reviews = reviewsResult;
 
-    res.json(game);
+        res.json(game);
+    }
+    catch {
+        console.error("Errore durante la fetch dei giochi");
+        res.status(500).json({ status: "server error", message: "internal server error" });
+    }
 };
 
 // create
 export const create = async (req, res) => {
-    // extract request body
-    const { name, description, image } = req.body;
+    try {
+        // extract request body
+        const { name, description, image } = req.body;
 
-    // check if request is legit
-    if (!name || !description || !image) return res.status(400).json({ status: "bad request", message: "request body is empty, incomplete or invalid" });
+        // check if request is legit
+        if (!name || !description || !image) return res.status(400).json({ status: "bad request", message: "request body is empty, incomplete or invalid" });
 
-    //SQL query
-    const sql = 'INSERT INTO boardgames (name, description, image) VALUES (?, ?, ?)'
+        //SQL query
+        const sql = 'INSERT INTO boardgames (name, description, image) VALUES (?, ?, ?)'
 
-    // connection query
-    const [results] = await connection.query(sql, [name, description, image]);
-    console.log(results);
+        // connection query
+        const [results] = await connection.query(sql, [name, description, image]);
+        console.log(results);
 
-    res.json({
-        id: results.insertId,
-        name,
-        description,
-        image
-    })
+        res.json({
+            id: results.insertId,
+            name,
+            description,
+            image
+        })
+    }
+    catch {
+        console.error("Errore durante la fetch dei giochi");
+        res.status(500).json({ status: "server error", message: "internal server error" });
+    }
 };
 
 // update
 export const update = async (req, res) => {
-    // extract id
-    const id = Number(req.params.id);
+    try {
+        // extract id
+        const id = Number(req.params.id);
 
-    // check id
-    if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
+        // check id
+        if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
 
-    // extract req body
-    const { name, description, image } = req.body;
+        // extract req body
+        const { name, description, image } = req.body;
 
-    // check req body
-    if (!name || !description || !image) return res.status(400).json({ status: "bad request", message: "request body is empty, incomplete or invalid" });
+        // check req body
+        if (!name || !description || !image) return res.status(400).json({ status: "bad request", message: "request body is empty, incomplete or invalid" });
 
-    // SQL query
-    const sql = 'UPDATE boardgames SET name = ?, description = ?, image = ? WHERE id = ?';
+        // SQL query
+        const sql = 'UPDATE boardgames SET name = ?, description = ?, image = ? WHERE id = ?';
 
-    // connection query
-    const [results] = await connection.query(sql, [name, description, image, id]);
+        // connection query
+        const [results] = await connection.query(sql, [name, description, image, id]);
 
-    if (results.affectedRows === 0) return res.status(404).json({ status: "not found", message: "not found: sql query was not completed" });
+        if (results.affectedRows === 0) return res.status(404).json({ status: "not found", message: "not found: sql query was not completed" });
 
-    res.json({
-        id,
-        name,
-        description,
-        image
-    })
+        res.json({
+            id,
+            name,
+            description,
+            image
+        })
+    }
+    catch {
+        console.error("Errore durante la fetch dei giochi");
+        res.status(500).json({ status: "server error", message: "internal server error" });
+    }
 };
 
 // destroy
 export const destroy = async (req, res) => {
-    // extract id
-    const id = Number(req.params.id);
+    try {
+        // extract id
+        const id = Number(req.params.id);
 
-    // check id
-    if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
+        // check id
+        if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
 
-    // SQL query
-    const sql = 'DELETE FROM boardgames WHERE id = ?'
+        // SQL query
+        const sql = 'DELETE FROM boardgames WHERE id = ?'
 
-    // connection query
-    const [results] = await connection.query(sql, [id]);
-    console.log(results);
+        // connection query
+        const [results] = await connection.query(sql, [id]);
+        console.log(results);
 
-    if (results.affectedRows === 0) return res.status(400).json({ status: "not found", message: "not found: sql query was not completed" });
+        if (results.affectedRows === 0) return res.status(400).json({ status: "not found", message: "not found: sql query was not completed" });
 
-    res.sendStatus(200);
+        res.sendStatus(200);
+    }
+    catch {
+        console.error("Errore durante la fetch dei giochi");
+        res.status(500).json({ status: "server error", message: "internal server error" });
+    }
 };
