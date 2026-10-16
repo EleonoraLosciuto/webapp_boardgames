@@ -19,15 +19,32 @@ export const show = async (req, res) => {
     if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
 
     // SQL query
-    let sql = 'SELECT * FROM boardgames WHERE id = ?';
+    const gameSql = 'SELECT * FROM boardgames WHERE id = ?';
+    const reviewsSql = `
+    SELECT r.*
+    FROM reviews r
+    JOIN boardgames b
+    ON b.id = r.id_boardgame
+    WHERE r.id_boardgame = ?
+    `;
 
     // connection query
-    const [result] = await connection.query(sql, [id]);
+    // game
+    const [gameResult] = await connection.query(gameSql, [id]);
 
-    // check if id exists
-    if (result.length === 0) return res.status(404).json({ status: "not found", message: "id not found" });
+    // check on game result
+    if (gameResult.length === 0) return res.status(404).json({ status: "not found", message: "game not found" })
 
-    res.json(result);
+    // extraction of result from game query
+    const [game] = gameResult;
+
+    // reviews
+    const [reviewsResult] = await connection.query(reviewsSql, [id]);
+
+    // add reviews array to game const
+    game.reviews = reviewsResult;
+
+    res.json(game);
 };
 
 // create
