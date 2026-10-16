@@ -1,5 +1,5 @@
 import express from 'express';
-import gameRouter from './router/gameRouter.js';
+import gameRouter from './routers/gameRouter.js';
 import { notFound } from './middlewares.js';
 
 

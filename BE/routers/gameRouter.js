@@ -1,4 +1,4 @@
-import { index, show, create, update, destroy } from '../controller/gamesController.js';
+import { index, show, create, update, destroy } from '../controllers/gamesController.js';
 import express from 'express';
 const gameRouter = express.Router();
 
