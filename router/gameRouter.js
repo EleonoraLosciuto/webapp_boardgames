@@ -1,4 +1,4 @@
-import { index, show, create } from '../controller/gamesController.js';
+import { index, show, create, update, destroy } from '../controller/gamesController.js';
 import express from 'express';
 const gameRouter = express.Router();
 
@@ -8,7 +8,13 @@ gameRouter.get("/", index);
 // show
 gameRouter.get("/:id", show);
 
-//create
+// create
 gameRouter.post("/", create);
+
+//update
+gameRouter.put("/:id", update);
+
+// destroy
+gameRouter.delete("/:id", destroy);
 
 export default gameRouter;

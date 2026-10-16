@@ -12,7 +12,7 @@ export const index = async (req, res) => {
 
 // show
 export const show = async (req, res) => {
-    // extract ID
+    // extract id
     const id = Number(req.params.id);
 
     // check id
@@ -36,7 +36,7 @@ export const create = async (req, res) => {
     const { name, description, image } = req.body;
 
     // check if request is legit
-    if (!name || !description || !image) return res.status(400).json({ status: "bad request", message: "request body is empty or invalid" });
+    if (!name || !description || !image) return res.status(400).json({ status: "bad request", message: "request body is empty, incomplete or invalid" });
 
     //SQL query
     const sql = 'INSERT INTO boardgames (name, description, image) VALUES (?, ?, ?)'
@@ -54,6 +54,51 @@ export const create = async (req, res) => {
 };
 
 // update
+export const update = async (req, res) => {
+    // extract id
+    const id = Number(req.params.id);
 
+    // check id
+    if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
+
+    // extract req body
+    const { name, description, image } = req.body;
+
+    // check req body
+    if (!name || !description || !image) return res.status(400).json({ status: "bad request", message: "request body is empty, incomplete or invalid" });
+
+    // SQL query
+    const sql = 'UPDATE boardgames SET name = ?, description = ?, image = ? WHERE id = ?';
+
+    // connection query
+    const [results] = await connection.query(sql, [name, description, image, id]);
+
+    if (results.affectedRows === 0) return res.status(404).json({ status: "not found", message: "not found: sql query was not completed" });
+
+    res.json({
+        id,
+        name,
+        description,
+        image
+    })
+};
 
 // destroy
+export const destroy = async (req, res) => {
+    // extract id
+    const id = Number(req.params.id);
+
+    // check id
+    if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
+
+    // SQL query
+    const sql = 'DELETE FROM boardgames WHERE id = ?'
+
+    // connection query
+    const [results] = await connection.query(sql, [id]);
+    console.log(results);
+
+    if (results.affectedRows === 0) return res.status(400).json({ status: "not found", message: "not found: sql query was not completed" });
+
+    res.sendStatus(200);
+};
