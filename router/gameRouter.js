@@ -1,4 +1,4 @@
-import { index, show } from '../controller/gamesController.js';
+import { index, show, create } from '../controller/gamesController.js';
 import express from 'express';
 const gameRouter = express.Router();
 
@@ -7,5 +7,8 @@ gameRouter.get("/", index);
 
 // show
 gameRouter.get("/:id", show);
+
+//create
+gameRouter.post("/", create);
 
 export default gameRouter;
