@@ -1,4 +1,4 @@
-import connection from 'data/db.js'
+import connection from '../data/db.js'
 
 // index
 export const index = async (req, res) => {
@@ -8,7 +8,7 @@ export const index = async (req, res) => {
     // connection query
     const [results] = await connection.query(sql);
     res.json(results);
-}
+};
 
 // show
 export const show = async (req, res) => {
@@ -20,5 +20,5 @@ export const show = async (req, res) => {
     // connection query
     const [result] = await connection.query(sql, [id]);
     res.json(result);
+};
 
-}

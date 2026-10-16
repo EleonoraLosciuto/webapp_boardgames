@@ -1,5 +1,5 @@
 import express from 'express';
-// import gamesRouter from 'routers/gamesRouter.js'
+import gameRouter from './router/gameRouter.js';
 
 
 const app = express();
@@ -12,12 +12,12 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // routing
-// app.use('/boardgames', gamesRouter);
+app.use('/boardgames', gameRouter);
 
-// error handler
+// Middleware: error handler
 // app.use(errorHandler);
 
-// page not found
+// Middleware: page not found
 // app.use(notFound);
 
 app.listen(port, () => {
