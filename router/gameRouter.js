@@ -1,0 +1,1 @@
+// import {index, show, create, update, destroy} from 'controllers/gamesController.js'
