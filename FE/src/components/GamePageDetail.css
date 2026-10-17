@@ -1,0 +1,8 @@
+.boardgame-detail {
+    display: flex;
+}
+
+.boardgame-detail .description-boardgame-detail {
+    display: flex;
+    flex-direction: column;
+}
