@@ -3,6 +3,7 @@
 }
 
 .layout main {
+    height: 100dvh;
     overflow: auto;
     color: beige;
     padding: 3rem;

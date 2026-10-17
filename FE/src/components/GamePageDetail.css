@@ -1,5 +1,10 @@
 .boardgame-detail {
     display: flex;
+    gap: 50px;
+}
+
+.boardgame-detail img {
+    width: 200px;
 }
 
 .boardgame-detail .description-boardgame-detail {

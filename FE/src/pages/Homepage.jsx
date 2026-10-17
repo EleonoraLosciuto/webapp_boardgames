@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import GameCard from "../components/GameCard";
 import './Homepage.css';
-import { Link } from "react-router";
 
 const Homepage = () => {
     // useState for Dashboard

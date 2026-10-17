@@ -15,10 +15,13 @@ const GameDetail = () => {
             .catch(err => (console.error("boardgame detail: ", err)))
     }, [id]);
 
+    if (!game) {
+        return <div className="loading">Caricamento dettagli in corso...</div>;
+    }
+
     return (
         <div className='boardgame-detail'>
-            Dettaglio del gioco con id = {id}
-            {console.log(game)}
+            <GamePageDetail game={game} />
         </div>
     )
 };
