@@ -1,26 +1,23 @@
 header {
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     background-color: rgb(198, 224, 233);
     color: black;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-    padding: 1.5rem;
-    border: 2px solid rgb(122, 200, 226);
-    border-radius: 10px;
-    transition: ease-in-out 0.3s;
-}
-
-a:hover {
-    transform: scale(1.1);
-}
-
 nav {
     display: flex;
     justify-content: flex-start;
-    gap: 5rem;
-    font-size: 1.5rem;
+    gap: 1.5rem;
+    font-size: 1rem;
+}
+
+nav a {
+    border-radius: 12px;
+}
+
+nav a.active {
+    font-weight: 900;
+    font-size: 1.05rem;
+    border: 2px solid rgb(133, 205, 230);
 }

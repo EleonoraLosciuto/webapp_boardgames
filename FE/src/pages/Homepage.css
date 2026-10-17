@@ -1,13 +1,31 @@
-.dashboard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5rem;
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
 }
 
-.dashboard .gamecard:hover {
+.container .dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 4rem;
+}
+
+.container .dashboard .gamecard:hover {
     transform: scale(1.05)
 }
 
-.dashboard .gamecard {
+.container .dashboard .gamecard {
     transition: ease-in-out 0.5s;
+}
+
+.container h1 {
+    color: bisque;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.container h2 {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: rgb(250, 250, 229);
 }

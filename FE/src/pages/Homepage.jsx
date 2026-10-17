@@ -2,23 +2,28 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import GameCard from "../components/GameCard";
 import './Homepage.css';
+import { Link } from "react-router";
 
 const Homepage = () => {
     // useState for Dashboard
-    const [dashboard, setDashboard] = useState([]);
+    const [games, setGames] = useState([]);
 
     // useEffect for fetching data from backend - dependency array is empty as we only call the DB on mounting
     useEffect(() => {
         axios.get('http://localhost:3000/boardgames')
-            .then((res) => (setDashboard(res.data)))
+            .then((res) => (setGames(res.data)))
             .catch((err) => (console.error("fetching data error: ", err)));
     }, [])
 
     return (
-        <div className="dashboard">
-            {dashboard.map(game => (
-                <GameCard key={game.id} game={game} />
-            ))}
+        <div className="container">
+            <h1>Boardgames repository</h1>
+            <h2>Offline nerds community</h2>
+            <div className="dashboard grid">
+                {games.map(game => (
+                    <GameCard key={game.id} game={game} />
+                ))}
+            </div>
         </div>
     )
 }
