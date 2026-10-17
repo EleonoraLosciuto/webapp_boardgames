@@ -26,24 +26,29 @@ export const show = async (req, res) => {
         if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
 
         // SQL query
-        const gameSql = 'SELECT * FROM boardgames WHERE id = ?';
-        const reviewsSql = 'SELECT * FROM reviews WHERE r.id_boardgame = ?';
+        const gameSql = `SELECT b.*, 
+        ROUND(AVG(r.rating)) AS avg_rating 
+        FROM boardgames b 
+        LEFT JOIN reviews r ON r.id_boardgame = b.id
+        WHERE b.id = ?
+        GROUP BY b.id` ;
 
         // connection query
         // game
         const [gameResult] = await connection.query(gameSql, [id]);
 
         // check on game result
-        if (gameResult.length === 0) return res.status(404).json({ status: "not found", message: "game not found" })
+        // note: left join always return one record even if all columns are null
+        if (!gameResult || gameResult[0].id == null) return res.status(404).json({ status: "not found", message: "game not found" })
 
         // extraction of result from game query
         const [game] = gameResult;
 
         // reviews
-        const [reviewsResult] = await connection.query(reviewsSql, [id]);
+        const reviewsSql = 'SELECT * from reviews r WHERE r.id_boardgame = ?'
 
-        // add reviews array to game const
-        game.reviews = reviewsResult;
+        const [reviewsResults] = await connection.query(reviewsSql, [id]);
+        game.reviews = reviewsResults;
 
         res.json(game);
     }
