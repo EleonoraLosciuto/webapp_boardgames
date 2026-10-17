@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import GameCard from "../components/GameCard";
+import './Homepage.css';
 
 const Homepage = () => {
     // useState for Dashboard

@@ -1,6 +1,4 @@
 import './GameCard.css';
-import { useParams } from "react-router";
-import { useEffect } from 'react';
 
 const GameCard = (props) => {
     const { name, image, description } = props.game;

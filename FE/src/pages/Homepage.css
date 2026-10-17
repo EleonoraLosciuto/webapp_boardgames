@@ -1,0 +1,13 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem;
+}
+
+.dashboard .gamecard:hover {
+    transform: scale(1.05)
+}
+
+.dashboard .gamecard {
+    transition: ease-in-out 0.5s;
+}

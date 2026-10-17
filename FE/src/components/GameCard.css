@@ -1,0 +1,6 @@
+.gamecard img {
+    width: 500px;
+    background-color: antiquewhite;
+    object-fit: contain;
+    aspect-ratio: 1/1;
+}
