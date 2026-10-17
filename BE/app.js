@@ -2,6 +2,7 @@ import express from 'express';
 import gameRouter from './routers/gameRouter.js';
 import { notFound } from './middlewares.js';
 import cors from 'cors';
+import 'dotenv/config';
 
 
 const app = express();
@@ -9,7 +10,7 @@ const port = 3000;
 
 // cors
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: process.env.FE_ORIGIN
 }));
 
 // static assets
