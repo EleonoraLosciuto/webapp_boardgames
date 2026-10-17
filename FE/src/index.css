@@ -6,6 +6,5 @@
 
 #root {
     height: 100dvh;
-    overflow: auto;
-    background-color: antiquewhite;
+    font-family: 'Trebuchet MS', sans-serif;
 }

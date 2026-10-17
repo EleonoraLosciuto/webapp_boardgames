@@ -8,7 +8,9 @@ const app = express();
 const port = 3000;
 
 // cors
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
 
 // static assets
 app.use(express.static("public"));

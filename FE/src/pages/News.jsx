@@ -1,3 +1,5 @@
+import './News.css';
+
 const News = () => (
     <>
         NEWSROOM

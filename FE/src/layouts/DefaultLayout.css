@@ -1,0 +1,10 @@
+.layout {
+    height: 100%;
+    background-color: rgb(48, 44, 44);
+}
+
+.layout main {
+    overflow: auto;
+    color: beige;
+    padding: 3rem;
+}
