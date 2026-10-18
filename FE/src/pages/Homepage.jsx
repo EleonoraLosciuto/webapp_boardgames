@@ -24,6 +24,7 @@ const Homepage = () => {
                         <h1>Boardgames repository</h1>
                         <h2>Offline nerds community</h2>
                         <p>La repository online per i nerd offline &#128526;</p>
+                        <p>I migliori giochi da tavola di sempre &#127937;</p>
                         <div className="dashboard grid">
                             {games.map(game => (
                                 <GameCard key={game.id} game={game} />
