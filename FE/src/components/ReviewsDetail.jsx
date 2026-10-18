@@ -8,7 +8,7 @@ const ReviewDetails = (props) => {
     return (
         <div className="reviews-section">
             <div className='review-heading'>
-                <h3>Our community review</h3>
+                <h2>Our community reviews</h2>
                 <h3>Average:
                     {(avg_rating) ?
                         (<Rating rating={avg_rating} />)

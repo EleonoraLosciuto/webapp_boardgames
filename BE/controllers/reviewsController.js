@@ -32,8 +32,6 @@ export const createReview = async (req, res) => {
         // extract id;
         const id = Number(req.params.id);
 
-        res.send(id);
-
         // extract request body
         const feedback = req.body.feedback;
         let username = req.body.username;
@@ -41,7 +39,7 @@ export const createReview = async (req, res) => {
 
         // validations on request body data
         if (!rating) return res.status(400).json({ status: "bad request", message: "review is empty, incomplete or invalid" });
-        if (numRating < 0 || numRating > 5) return res.status(400).json({ status: "bad request", message: "rating must be between 0 and 5" });
+        if (rating < 0 || rating > 5) return res.status(400).json({ status: "bad request", message: "rating must be between 0 and 5" });
 
         // if user is anonymous
         if (!username) (username = "anonymous");
@@ -51,7 +49,8 @@ export const createReview = async (req, res) => {
 
         // connection query
         const [results] = await connection.query(sql, [username, feedback, rating, id]);
-        console.log(results);
+
+        res.status(201).json(results)
     }
     catch (err) {
         console.error("Errore durante la fetch delle review", err);
