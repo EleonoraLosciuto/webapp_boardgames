@@ -1,0 +1,5 @@
+.review-heading {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}

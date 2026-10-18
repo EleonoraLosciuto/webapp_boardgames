@@ -27,7 +27,7 @@ export const show = async (req, res) => {
 
         // SQL query
         const gameSql = `SELECT b.*, 
-        ROUND(AVG(r.rating)) AS avg_rating 
+        ROUND(AVG(r.rating), 1) AS avg_rating 
         FROM boardgames b 
         LEFT JOIN reviews r ON r.id_boardgame = b.id
         WHERE b.id = ?
