@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import GameCard from "../components/GameCard";
+import Loader from "../components/Loader";
 import './Homepage.css';
+
 
 const Homepage = () => {
     // useState for Dashboard
@@ -12,19 +14,28 @@ const Homepage = () => {
         axios.get('http://localhost:3000/boardgames')
             .then((res) => (setGames(res.data)))
             .catch((err) => (console.error("fetching data error: ", err)));
-    }, [])
+    }, []);
 
-    return (
-        <div className="container">
-            <h1>Boardgames repository</h1>
-            <h2>Offline nerds community</h2>
-            <div className="dashboard grid">
-                {games.map(game => (
-                    <GameCard key={game.id} game={game} />
-                ))}
-            </div>
-        </div>
-    )
+    {
+        return (
+            (games.length > 0) ?
+                (
+                    <div className="container">
+                        <h1>Boardgames repository</h1>
+                        <h2>Offline nerds community</h2>
+                        <p>La repository online per i nerd offline &#128526;</p>
+                        <div className="dashboard grid">
+                            {games.map(game => (
+                                <GameCard key={game.id} game={game} />
+                            ))}
+                        </div>
+                    </div>
+                )
+                : (
+                    <Loader />
+                )
+        )
+    }
 }
 
 export default Homepage;

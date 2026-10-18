@@ -1,4 +1,5 @@
 import './GameDetail.css';
+import Loader from '../components/Loader';
 
 // useParams, useEffect, useState, Axios
 import { useParams } from 'react-router';
@@ -21,7 +22,7 @@ const GameDetail = () => {
     }, [id]);
 
     if (!game) {
-        return <div className="loading">Caricamento dettagli in corso...</div>;
+        return <Loader />;
     }
 
     return (
