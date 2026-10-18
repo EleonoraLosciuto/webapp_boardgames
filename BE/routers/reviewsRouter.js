@@ -1,4 +1,4 @@
-import { indexReviews, createReview, destroyReview } from '../controllers/reviewsController.js';
+import { indexReviews, createReview } from '../controllers/reviewsController.js';
 import express from 'express';
 const reviewsRouter = express.Router({ mergeParams: true });
 
@@ -8,7 +8,5 @@ reviewsRouter.get("/", indexReviews);
 // create
 reviewsRouter.post("/", createReview);
 
-// destroy
-reviewsRouter.delete("/:revId", destroyReview);
 
 export default reviewsRouter;

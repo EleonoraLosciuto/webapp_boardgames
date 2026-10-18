@@ -59,28 +59,3 @@ export const createReview = async (req, res) => {
     }
 };
 
-// destroy
-export const destroyReview = async (req, res) => {
-    try {
-        // extract id
-        const id = Number(req.params.revId);
-
-        // check id
-        if (isNaN(id)) return res.status(400).json({ status: "bad request", message: "id must be a number" });
-
-        // SQL query
-        const sql = 'DELETE FROM reviews WHERE id = ?'
-
-        // connection query
-        const [results] = await connection.query(sql, [id]);
-        console.log(results);
-
-        if (results.affectedRows === 0) return res.status(400).json({ status: "not found", message: "not found: sql query was not completed" });
-
-        res.sendStatus(200);
-    }
-    catch (err) {
-        console.error("Errore durante la fetch delle review", err);
-        res.status(500).json({ status: "server error", message: "internal server error" });
-    }
-}
