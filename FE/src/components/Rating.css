@@ -1,0 +1,18 @@
+.rating-mask {
+    display: inline-block;
+    position: relative;
+    font-size: 1.6rem;
+    margin-left: 0.5rem;
+}
+
+.rating-mask .empty-stars {
+    color: grey;
+}
+
+.rating-mask .full-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: yellow;
+    overflow: hidden;
+}

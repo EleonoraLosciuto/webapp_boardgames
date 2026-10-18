@@ -1,5 +1,6 @@
 import './ReviewsDetail.css';
 import ReviewCard from './ReviewCard';
+import Rating from './Rating';
 
 const ReviewDetails = (props) => {
     const { avg_rating, reviews } = props.game;
@@ -10,7 +11,7 @@ const ReviewDetails = (props) => {
                 <h3>Our community review</h3>
                 <h3>Average:
                     {(avg_rating) ?
-                        (` ${avg_rating}`)
+                        (<Rating rating={avg_rating} />)
                         : (" Nessuna recensione disponibile")
                     }
                 </h3>

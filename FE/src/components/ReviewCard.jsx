@@ -1,3 +1,4 @@
+import Rating from './Rating';
 import './ReviewCard.css';
 
 const ReviewCard = (props) => {
@@ -5,7 +6,9 @@ const ReviewCard = (props) => {
     return (
         <div className="review-box">
             <div className="text">{feedback}</div>
-            <div className="rating">Vote: {rating}</div>
+            <div className="rating">Vote:
+                <Rating rating={rating} />
+            </div>
             <div className="name"><span id='by'>by</span> {username}</div>
         </div>
     )

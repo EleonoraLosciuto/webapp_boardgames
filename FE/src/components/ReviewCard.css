@@ -4,12 +4,9 @@
     margin: 1.2rem auto;
 }
 
-.review-box * {
-    padding: .25rem 0;
-}
-
-.review-box .name {
+.review-box>* {
     font-weight: 800;
+    padding: 0.25rem 0;
 }
 
 .review-box .text,
