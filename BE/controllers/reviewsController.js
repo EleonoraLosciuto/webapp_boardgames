@@ -35,9 +35,9 @@ export const createReview = async (req, res) => {
         res.send(id);
 
         // extract request body
-        const { feedback, rating } = req.body;
+        const feedback = req.body.feedback;
         let username = req.body.username;
-        const numRating = Number(rating);
+        const rating = Number(req.body.rating);
 
         // validations on request body data
         if (!rating) return res.status(400).json({ status: "bad request", message: "review is empty, incomplete or invalid" });

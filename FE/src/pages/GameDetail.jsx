@@ -9,6 +9,7 @@ import axios from 'axios';
 // components
 import GamePageDetail from '../components/GamePageDetail';
 import ReviewDetails from '../components/ReviewsDetail';
+import ReviewForm from '../components/ReviewForm';
 
 
 const GameDetail = () => {
@@ -29,6 +30,7 @@ const GameDetail = () => {
         <div className='boardgame-id-page'>
             <GamePageDetail game={game} />
             <ReviewDetails game={game} />
+            <ReviewForm />
         </div>
     )
 };
